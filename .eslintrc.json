@@ -1,3 +1,42 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "prefer-const": "error",
+    "no-unused-vars": "error",
+    "no-console": "error",
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/core",
+            "from": "./src/components"
+          },
+          {
+            "target": "./src/core",
+            "from": "./src/lib"
+          },
+          {
+            "target": "./src/core",
+            "from": "./src/pages"
+          },
+          {
+            "target": "./src/lib",
+            "from": "./src/pages"
+          },
+          {
+            "target": "./src/components",
+            "from": "./src/pages"
+          }
+        ]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error"
+  }
 }
