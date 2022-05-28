@@ -19,7 +19,7 @@ export const WeatherSearch: FunctionComponent<WeatherSearchProps> = ({
   const [suggestions, setSuggestions] = useState<Place[]>([]);
   const [selectedCity, setSelectedCity] = useState<CityOption | null>(null);
   const cityToOption = (city: Place): CityOption => ({
-    label: city.name,
+    label: city.name + ', ' + city.country,
     value: city.id,
   });
   const cityOptions = async (search: string) => {
