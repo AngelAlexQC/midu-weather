@@ -21,4 +21,5 @@ a {
 #__next {
   min-height: 100vh;
   display: flex;
+  background-color: #041623;
 }

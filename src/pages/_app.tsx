@@ -1,17 +1,20 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { MainLayout } from 'layout/main-layout/MainLayout';
+import Head from 'next/head';
+import Script from 'next/script';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <MainLayout>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css"
-      />
-      <Component {...pageProps} />
-      <script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js" />
-    </MainLayout>
+    <>
+      <Head>
+        <title>MiduWeather | Ángel Quiroz</title>
+      </Head>
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
+      <Script src="/js/font-awesome.js" />
+    </>
   );
 }
 
