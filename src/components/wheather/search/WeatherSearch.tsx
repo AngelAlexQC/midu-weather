@@ -2,10 +2,10 @@ import { FunctionComponent, useState } from 'react';
 import { Place } from 'lib/interfaces/place';
 import AsyncSelect from 'react-select/async';
 import { SingleValue } from 'react-select';
-import { searchPlace } from 'src/services/searchPlace';
+import { searchPlace } from 'lib/services/apiService';
 
 interface WeatherSearchProps {
-  onSelect?: (place: Place) => void;
+  onSelect: (place: Place) => void;
 }
 interface CityOption {
   label: string;
@@ -40,7 +40,6 @@ export const WeatherSearch: FunctionComponent<WeatherSearchProps> = ({
   return (
     <div className="my-3">
       <AsyncSelect
-        cacheOptions
         defaultOptions
         loadOptions={cityOptions}
         onChange={handleSelect}

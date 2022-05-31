@@ -1,10 +1,18 @@
 import { WeatherHeader } from 'components/wheather/header/WeatherHeader';
-import { useWeather } from 'lib/hooks/useWeather';
+
 import type { NextPage } from 'next';
+import { useContext } from 'react';
+import { WeatherContext } from 'src/context/WeatherContextProvider';
 
 const Home: NextPage = () => {
-  const { weather } = useWeather('Chamanga, Ecuador');
-  return <>{weather && <WeatherHeader weather={weather} />}</>;
+  const { weather, changeLocation } = useContext(WeatherContext);
+  return (
+    <>
+      {weather && (
+        <WeatherHeader weather={weather} onChangeLocation={changeLocation} />
+      )}
+    </>
+  );
 };
 
 export default Home;
