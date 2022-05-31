@@ -1,13 +1,15 @@
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode, useContext } from 'react';
+import { WeatherContext } from 'src/context/WeatherContextProvider';
 import styles from './MainLayout.module.scss';
 export const MainLayout: FunctionComponent<{ children: ReactNode }> = ({
   children,
 }) => {
+  const { background } = useContext(WeatherContext);
   return (
     <main className={`card ${styles.main} `}>
       <img
         className={`card-img ${styles.img} `}
-        src="https://picsum.photos/600/1200/?blur"
+        src={background}
         alt="MiduWeather"
       />
       <div className="card-img-overlay justify-content-start">{children}</div>

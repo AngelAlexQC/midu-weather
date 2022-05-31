@@ -1,6 +1,6 @@
 import { Place } from 'lib/interfaces/place';
 import { Weather } from 'lib/interfaces/weather';
-import { searchPlace, getWeather } from 'lib/services/apiService';
+import { getBackground, getWeather } from 'lib/services/apiService';
 import {
   createContext,
   FunctionComponent,
@@ -12,6 +12,7 @@ import {
 interface WeatherContextProps {
   weather: Weather | null;
   place: Place | null;
+  background: string;
   changeLocation: (place: Place) => void;
 }
 
@@ -19,6 +20,7 @@ export const WeatherContext = createContext<WeatherContextProps>({
   weather: null,
   place: null,
   changeLocation: () => {},
+  background: '',
 });
 
 const WeatherContextProvider: FunctionComponent<{
@@ -37,6 +39,9 @@ const WeatherContextProvider: FunctionComponent<{
     }
     return null;
   });
+  const [background, setBackground] = useState<string>(
+    'https://picsum.photos/600/1200/?blur',
+  );
 
   useEffect(() => {
     const getWeatherAndPlace = async (place: Place | string) => {
@@ -44,6 +49,10 @@ const WeatherContextProvider: FunctionComponent<{
         typeof place === 'string' ? place : place.name + ',' + place.country;
       const weather = await getWeather(placeToSearch);
       setWeather(weather);
+      const city = weather.location.name + ',' + weather.location.country;
+      getBackground(city).then((background) => {
+        setBackground(background.url);
+      });
       typeof place === 'string' ? setPlace(null) : setPlace(place);
     };
     if (!place) {
@@ -58,8 +67,13 @@ const WeatherContextProvider: FunctionComponent<{
 
   const changeLocation = (place: Place) => {
     setPlace(place);
+    localStorage.setItem('place', JSON.stringify(place));
     getWeather(place.name + ',' + place.country).then((weather) => {
       setWeather(weather);
+      // update background
+      getBackground(place.name + ',' + place.country).then((background) => {
+        setBackground(background.url);
+      });
     });
   };
 
@@ -69,6 +83,7 @@ const WeatherContextProvider: FunctionComponent<{
         weather,
         place,
         changeLocation,
+        background,
       }}
     >
       {children}
