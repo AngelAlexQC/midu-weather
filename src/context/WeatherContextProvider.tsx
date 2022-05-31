@@ -70,10 +70,6 @@ const WeatherContextProvider: FunctionComponent<{
     localStorage.setItem('place', JSON.stringify(place));
     getWeather(place.name + ',' + place.country).then((weather) => {
       setWeather(weather);
-      // update background
-      getBackground(place.name + ',' + place.country).then((background) => {
-        setBackground(background.url);
-      });
     });
   };
 

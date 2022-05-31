@@ -6,13 +6,24 @@ export const MainLayout: FunctionComponent<{ children: ReactNode }> = ({
 }) => {
   const { background } = useContext(WeatherContext);
   return (
-    <main className={`card ${styles.main} `}>
+    <main
+      className={`${styles.main}`}
+      style={{
+        background: `url(${background}) no-repeat center center fixed`,
+      }}
+    >
       <img
         className={`card-img ${styles.img} `}
         src={background}
         alt="MiduWeather"
+        onError={(e) => {
+          (e.target as HTMLImageElement).src =
+            'https://picsum.photos/600/1200/?blur';
+        }}
       />
-      <div className="card-img-overlay justify-content-start">{children}</div>
+      <div className={`card-img-overlay justify-content-start ${styles.main}`}>
+        {children}
+      </div>
     </main>
   );
 };

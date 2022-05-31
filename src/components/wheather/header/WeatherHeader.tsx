@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { FunctionComponent } from 'react';
 import { WeatherSearch } from 'components/wheather/search/WeatherSearch';
 import styles from './WeatherHeader.module.scss';
+import { Footer } from '../footer/Footer';
 interface WeatherHeaderProps {
   weather: Weather;
   onChangeLocation: (location: Place) => void;
@@ -15,8 +16,8 @@ export const WeatherHeader: FunctionComponent<WeatherHeaderProps> = ({
 }) => {
   return (
     <>
-      <div className="d-flex flex-column">
-        <div className="d-flex flex-row justify-content-between">
+      <div className={`d-flex flex-column ${styles.column}`} >
+        <div className="d-flex flex-row justify-content-center">
           <div className={styles.cityName}>
             <i className={`fa fa-map-marker ${styles.marker}`}></i>
             <span>
@@ -42,6 +43,7 @@ export const WeatherHeader: FunctionComponent<WeatherHeaderProps> = ({
           </div>
         </div>
         <WeatherSearch onSelect={onChangeLocation} />
+        <Footer />
       </div>
     </>
   );

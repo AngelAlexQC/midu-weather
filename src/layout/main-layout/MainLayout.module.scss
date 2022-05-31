@@ -3,21 +3,18 @@
   height: 100vh;
   display: block;
   margin: auto;
-  box-shadow: 0 0.5rem 1rem #041623 !important;
   max-height: 100vh;
-  background: #041623 !important;
   .img {
     height: 100%;
     object-fit: cover;
-    border-radius: 10px !important;
+    border-radius: 0 !important;
     filter: blur(1px);
   }
 }
 @media (min-width: 420px) {
   .main {
-    border-radius: 10px !important;
+    border-radius: 0px !important;
     aspect-ratio: 9/16;
-    width: 420px;
     height: auto;
   }
 }
